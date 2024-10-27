@@ -18,5 +18,5 @@ httpInstance.interceptors.response.use(res => res.data, e => {
     return Promise.reject(e)
 })
 
-
+//默认导出
 export default httpInstance
