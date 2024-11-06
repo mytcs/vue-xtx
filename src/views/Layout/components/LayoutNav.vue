@@ -1,11 +1,21 @@
 <script setup>
+import { useUserStore } from "@/stores/user";
+const userStore = useUserStore();
+
+// 用户退出登录
+const confirm = () => {
+  //  1.清除用户信息
+  userStore.clearUserInfo();
+};
 </script>
 
 <template>
   <nav class="app-topnav">
     <div class="container">
       <ul>
-        <template v-if="true">
+        <!-- 多模板渲染，区分登录状态和非登录状态 -->
+        <!-- 思路：是否有token来判断 -->
+        <template v-if="userStore.userInfo.token">
           <li>
             <a href="javascript:;"><i class="iconfont icon-user"></i>陶陶陶</a>
           </li>
@@ -14,17 +24,23 @@
               title="确认退出吗?"
               confirm-button-text="确认"
               cancel-button-text="取消"
+              @confirm="confirm"
             >
               <template #reference>
                 <a href="javascript:;">退出登录</a>
               </template>
             </el-popconfirm>
           </li>
-          <li><a href="javascript:;">我的订单</a></li>
+          <li>
+            <a href="javascript:;">我的订单</a>
+          </li>
           <li><a href="javascript:;">会员中心</a></li>
         </template>
+
         <template v-else>
-          <li><a href="javascript:;">请先登录</a></li>
+          <li>
+            <a href="javascript:;" @click="$router.push('/login')">请先登录</a>
+          </li>
           <li><a href="javascript:;">帮助中心</a></li>
           <li><a href="javascript:;">关于我们</a></li>
         </template>

@@ -11,12 +11,12 @@ export const lazyPlugin = {
             mounted(el, binding) {
                 //  el:指令绑定的标签元素
                 //  bingding: bingding.value 即等于号后面绑定表达式的值，图片url
-                console.log(el, binding);
+                // console.log(el, binding);
 
                 const { stop } = useIntersectionObserver(
                     el,
                     ([{ isIntersecting }]) => {
-                        console.log(isIntersecting);
+                        // console.log(isIntersecting);
                         if (isIntersecting) {
                             // 进入视口  
                             el.src = binding.value
